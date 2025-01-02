@@ -201,6 +201,54 @@
         body.dark-mode #contactForm input::placeholder, body.dark-mode #contactForm textarea::placeholder {
             color: #bdc3c7;
         }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            section {
+                padding: 20px;
+            }
+            #name {
+                font-size: 1.8em;
+            }
+            #profession {
+                font-size: 1.2em;
+            }
+            .skills {
+                gap: 10px;
+            }
+            .skills .skill {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            .experience-list, .education-list, .certifications-list, .languages-list {
+                padding: 0 10px;
+            }
+            .experience-item, .education-item, .certification-item {
+                padding: 10px;
+            }
+            #contactForm input, #contactForm textarea {
+                padding: 8px;
+            }
+            .theme-toggle {
+                bottom: 10px;
+                left: 10px;
+                font-size: 1.2em;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
