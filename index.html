@@ -11,7 +11,7 @@
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         header {
             display: flex;
@@ -161,6 +161,7 @@
         #contactForm button {
             width: 100%;
         }
+        /* Dark Mode Styles */
         body.dark-mode {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -170,13 +171,35 @@
         }
         body.dark-mode .cv-button, body.dark-mode #contactForm button {
             background-color: #34495e;
+            color: #ecf0f1;
         }
         body.dark-mode .skills .skill {
             background-color: #34495e;
+            color: #ecf0f1;
         }
         body.dark-mode .experience-item, body.dark-mode .education-item, body.dark-mode .certification-item {
             background-color: #34495e;
             color: #ecf0f1;
+        }
+        body.dark-mode a {
+            color: #3498db;
+        }
+        body.dark-mode a:hover {
+            color: #f1c40f;
+        }
+        body.dark-mode .social-icons a {
+            color: #3498db;
+        }
+        body.dark-mode .social-icons a:hover {
+            color: #f1c40f;
+        }
+        body.dark-mode #contactForm input, body.dark-mode #contactForm textarea {
+            background-color: #34495e;
+            color: #ecf0f1;
+            border-color: #7f8c8d;
+        }
+        body.dark-mode #contactForm input::placeholder, body.dark-mode #contactForm textarea::placeholder {
+            color: #bdc3c7;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -247,7 +270,6 @@
                 <p>يونيو 2023 - أغسطس 2023</p>
                 <p>اكتسبت خبرة قيمة في العمل في إدارة الأعمال بشركة Vooc، وهي شركة شحن محلي. خلال هذه الفترة، ساهمت في التشغيل الفعال والتخطيط الاستراتيجي للشركة، مما عزز مهاراتي الإدارية في بيئة ديناميكية.</p>
             </div>
-            <!-- يمكن إضافة المزيد من الخبرات هنا -->
         </div>
     </section>
 
@@ -258,7 +280,6 @@
                 <h3>بكالوريوس في علوم الحاسب</h3>
                 <p>جامعة دمياط - 2021 إلى 2025</p>
             </div>
-            <!-- يمكن إضافة المزيد من المؤهلات هنا -->
         </div>
     </section>
 
@@ -277,7 +298,6 @@
                 <h3>شهادة Employability Skills Track</h3>
                 <p>الجامعة الأمريكية - Aspire</p>
             </div>
-            <!-- يمكن إضافة المزيد من الشهادات هنا -->
         </div>
     </section>
 
@@ -294,7 +314,6 @@
         <img src="picture.jpeg" alt="صلاح أحمد" class="profile-img">
         <div class="social-icons">
             <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <!-- يمكن إضافة المزيد من الروابط الاجتماعية هنا -->
         </div>
         <a href="MY_CV.pdf" class="cv-button" target="_blank" id="cv-button">تحميل السيرة الذاتية</a>
     </section>
