@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صلاح أحمد - مهندس برمجيات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3498db;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+        .language-toggle {
+            cursor: pointer;
+            font-weight: bold;
+            color: #3498db;
+            background-color: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .language-toggle:hover {
+            background-color: #bdc3c7;
+        }
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5em;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #3498db;
+            transition: color 0.3s;
+        }
+        .theme-toggle:hover {
+            color: #f1c40f;
+        }
+        section {
+            padding: 50px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #name {
+            font-size: 2.2em;
+            margin: 0;
+            color: #3498db;
+        }
+        #profession {
+            font-size: 1.5em;
+            margin: 0;
+            color: #7f8c8d;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #3498db;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #f1c40f;
+        }
+        .cv-button, #contactForm button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cv-button:hover, #contactForm button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .skills .skill {
+            text-align: center;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .skills .skill:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #3498db;
+        }
+        .experience-list, .education-list, .certifications-list, .languages-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .experience-item, .education-item, .certification-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #contactForm input, #contactForm textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+        #contactForm button {
+            width: 100%;
+        }
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        body.dark-mode header {
+            background-color: #34495e;
+        }
+        body.dark-mode .cv-button, body.dark-mode #contactForm button {
+            background-color: #34495e;
+        }
+        body.dark-mode .skills .skill {
+            background-color: #34495e;
+        }
+        body.dark-mode .experience-item, body.dark-mode .education-item, body.dark-mode .certification-item {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home" id="nav-home">الرئيسية</a></li>
+                <li><a href="#about" id="nav-about">عنّي</a></li>
+                <li><a href="#projects" id="nav-projects">المشاريع</a></li>
+                <li><a href="#contact" id="nav-contact">معلومات الاتصال</a></li>
+                <li><a href="#skills" id="nav-skills">المهارات</a></li>
+                <li><a href="#experience" id="nav-experience">الخبرات</a></li>
+                <li><a href="#education" id="nav-education">التعليم</a></li>
+                <li><a href="#certifications" id="nav-certifications">الشهادات</a></li>
+                <li><a href="#languages" id="nav-languages">اللغات</a></li>
+            </ul>
+        </nav>
+        <div class="language-toggle" onclick="toggleLanguage()">EN</div>
+    </header>
+
+    <section id="home">
+        <h1 id="name">صلاح أحمد عبد السلام</h1>
+        <h2 id="profession">مهندس برمجيات</h2>
+    </section>
+
+    <section id="about">
+        <h2 id="about-title">عنّي</h2>
+        <p id="about-text">أنا صلاح أحمد، عمري 22 عامًا، أدرس بكلية علوم قسم علوم الحاسب. أعمل كمحلل بيانات، ويسعدني وجودكم على صفحتي الشخصية.</p>
+    </section>
+
+    <section id="projects">
+        <h2 id="projects-title">المشاريع</h2>
+        <p id="projects-text">تفاصيل عن مشاريعك هنا.</p>
+    </section>
+
+    <section id="skills">
+        <h2 id="skills-title">المهارات</h2>
+        <div class="skills">
+            <div class="skill">Python</div>
+            <div class="skill">MySQL</div>
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">API</div>
+            <div class="skill">ICDL</div>
+            <div class="skill">Power BI</div>
+            <div class="skill">Mathematical</div>
+            <div class="skill">Data Analysis</div>
+            <div class="skill">Data Entry</div>
+            <div class="skill">Data Science</div>
+            <div class="skill">Algorithms</div>
+            <div class="skill">SQL</div>
+            <div class="skill">Git</div>
+            <div class="skill">Testing</div>
+            <div class="skill">UI/UX</div>
+            <div class="skill">Agile</div>
+            <div class="skill">DevOps</div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 id="experience-title">الخبرات</h2>
+        <div class="experience-list">
+            <div class="experience-item">
+                <h3>إدارة الأعمال - شركة Vooc</h3>
+                <p>يونيو 2023 - أغسطس 2023</p>
+                <p>اكتسبت خبرة قيمة في العمل في إدارة الأعمال بشركة Vooc، وهي شركة شحن محلي. خلال هذه الفترة، ساهمت في التشغيل الفعال والتخطيط الاستراتيجي للشركة، مما عزز مهاراتي الإدارية في بيئة ديناميكية.</p>
+            </div>
+            <!-- يمكن إضافة المزيد من الخبرات هنا -->
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 id="education-title">التعليم</h2>
+        <div class="education-list">
+            <div class="education-item">
+                <h3>بكالوريوس في علوم الحاسب</h3>
+                <p>جامعة دمياط - 2021 إلى 2025</p>
+            </div>
+            <!-- يمكن إضافة المزيد من المؤهلات هنا -->
+        </div>
+    </section>
+
+    <section id="certifications">
+        <h2 id="certifications-title">الشهادات</h2>
+        <div class="certifications-list">
+            <div class="certification-item">
+                <h3>شهادة ICDL</h3>
+                <p>جامعة دمياط</p>
+            </div>
+            <div class="certification-item">
+                <h3>مشاركة في مسابقة ECPC</h3>
+                <p>2023 و 2024</p>
+            </div>
+            <div class="certification-item">
+                <h3>شهادة Employability Skills Track</h3>
+                <p>الجامعة الأمريكية - Aspire</p>
+            </div>
+            <!-- يمكن إضافة المزيد من الشهادات هنا -->
+        </div>
+    </section>
+
+    <section id="languages">
+        <h2 id="languages-title">اللغات</h2>
+        <div class="languages-list">
+            <p>العربية: اللغة الأم</p>
+            <p>الإنجليزية: متقدم</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 id="contact-title">معلومات الاتصال</h2>
+        <img src="imgs/WhatsApp Image 2022-12-22 at 6.49.43 PM.jpeg" alt="صلاح أحمد" class="profile-img">
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <!-- يمكن إضافة المزيد من الروابط الاجتماعية هنا -->
+        </div>
+        <a href="MY_CV.pdf" class="cv-button" target="_blank" id="cv-button">تحميل السيرة الذاتية</a>
+    </section>
+
+    <section id="contact-form">
+        <h2 id="contact-form-title">تواصل معي</h2>
+        <form id="contactForm">
+            <input type="text" id="nameInput" placeholder="الاسم" required />
+            <input type="email" id="emailInput" placeholder="البريد الإلكتروني" required />
+            <textarea id="messageInput" placeholder="الرسالة" required></textarea>
+            <button type="submit">إرسال</button>
+        </form>
+    </section>
+
+    <!-- زر الوضع الليلي -->
+    <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+
+    <script>
+        // تغيير الخلفية بناءً على التوقيت
+        function setBackground() {
+            const hour = new Date().getHours();
+            const body = document.body;
+
+            if (hour >= 6 && hour < 18) {
+                body.style.backgroundColor = "#f8f9fa"; // لون فاتح للنهار
+            } else {
+                body.style.backgroundColor = "#2c3e50"; // لون غامق لليل
+            }
+        }
+
+        setBackground();
+
+        // تحويل اللغة
+        function toggleLanguage() {
+            const langToggle = document.querySelector('.language-toggle');
+            const nameElement = document.getElementById('name');
+            const professionElement = document.getElementById('profession');
+            const aboutTitle = document.getElementById('about-title');
+            const aboutText = document.getElementById('about-text');
+            const projectsTitle = document.getElementById('projects-title');
+            const projectsText = document.getElementById('projects-text');
+            const contactTitle = document.getElementById('contact-title');
+            const skillsTitle = document.getElementById('skills-title');
+            const cvButton = document.getElementById('cv-button');
+            const navHome = document.getElementById('nav-home');
+            const navAbout = document.getElementById('nav-about');
+            const navProjects = document.getElementById('nav-projects');
+            const navContact = document.getElementById('nav-contact');
+            const navSkills = document.getElementById('nav-skills');
+            const navExperience = document.getElementById('nav-experience');
+            const navEducation = document.getElementById('nav-education');
+            const navCertifications = document.getElementById('nav-certifications');
+            const navLanguages = document.getElementById('nav-languages');
+            const experienceTitle = document.getElementById('experience-title');
+            const experienceItems = document.querySelectorAll('.experience-item h3, .experience-item p');
+            const educationTitle = document.getElementById('education-title');
+            const educationItems = document.querySelectorAll('.education-item h3, .education-item p');
+            const certificationsTitle = document.getElementById('certifications-title');
+            const certificationItems = document.querySelectorAll('.certification-item h3, .certification-item p');
+            const languagesTitle = document.getElementById('languages-title');
+            const languagesItems = document.querySelectorAll('.languages-list p');
+            const contactFormTitle = document.getElementById('contact-form-title');
+            const nameInput = document.getElementById('nameInput');
+            const emailInput = document.getElementById('emailInput');
+            const messageInput = document.getElementById('messageInput');
+            const submitButton = document.querySelector('#contactForm button');
+            const skills = document.querySelectorAll('.skills .skill');
+
+            if (langToggle.textContent === 'EN') {
+                langToggle.textContent = 'AR';
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                nameElement.textContent = 'Salah Ahmed';
+                professionElement.textContent = 'Software Engineer';
+                aboutTitle.textContent = 'About Me';
+                aboutText.textContent = 'I am Salah Ahmed, 22 years old, studying Computer Science at the Faculty of Science. I work as a data analyst, and I am happy to have you on my personal page.';
+                projectsTitle.textContent = 'Projects';
+                projectsText.textContent = 'Details about your projects here.';
+                contactTitle.textContent = 'Contact Information';
+                skillsTitle.textContent = 'Skills';
+                cvButton.textContent = 'Download CV';
+                navHome.textContent = 'Home';
+                navAbout.textContent = 'About Me';
+                navProjects.textContent = 'Projects';
+                navContact.textContent = 'Contact';
+                navSkills.textContent = 'Skills';
+                navExperience.textContent = 'Experience';
+                navEducation.textContent = 'Education';
+                navCertifications.textContent = 'Certifications';
+                navLanguages.textContent = 'Languages';
+                experienceTitle.textContent = 'Experience';
+                experienceItems[0].textContent = 'Business Management - Vooc Company';
+                experienceItems[2].textContent = 'I gained valuable experience working in business management at Vooc, a domestic shipping company, from June to August. During this period, I contributed to the efficient operation and strategic planning of the company, enhancing my management skills in a dynamic environment.';
+                educationTitle.textContent = 'Education';
+                educationItems[0].textContent = 'Bachelor of Computer Science';
+                educationItems[1].textContent = 'Damietta University - 2021 to 2025';
+                certificationsTitle.textContent = 'Certifications';
+                certificationItems[0].textContent = 'ICDL Certificate';
+                certificationItems[1].textContent = 'Damietta University';
+                certificationItems[2].textContent = 'Participation in ECPC Competition';
+                certificationItems[3].textContent = '2023 and 2024';
+                certificationItems[4].textContent = 'Employability Skills Track Certificate';
+                certificationItems[5].textContent = 'American University - Aspire';
+                languagesTitle.textContent = 'Languages';
+                languagesItems[0].textContent = 'Arabic: Native';
+                languagesItems[1].textContent = 'English: Advanced';
+                contactFormTitle.textContent = 'Contact Me';
+                nameInput.placeholder = 'Name';
+                emailInput.placeholder = 'Email';
+                messageInput.placeholder = 'Message';
+                submitButton.textContent = 'Send';
+                skills[0].textContent = 'Python';
+                skills[1].textContent = 'MySQL';
+                skills[2].textContent = 'HTML';
+                skills[3].textContent = 'CSS';
+                skills[4].textContent = 'JavaScript';
+                skills[5].textContent = 'API';
+                skills[6].textContent = 'ICDL';
+                skills[7].textContent = 'Power BI';
+                skills[8].textContent = 'Mathematical';
+                skills[9].textContent = 'Data Analysis';
+                skills[10].textContent = 'Data Entry';
+                skills[11].textContent = 'Data Science';
+                skills[12].textContent = 'Algorithms';
+                skills[13].textContent = 'SQL';
+                skills[14].textContent = 'Git';
+                skills[15].textContent = 'Testing';
+                skills[16].textContent = 'UI/UX';
+                skills[17].textContent = 'Agile';
+                skills[18].textContent = 'DevOps';
+            } else {
+                langToggle.textContent = 'EN';
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                nameElement.textContent = 'صلاح أحمد';
+                professionElement.textContent = 'مهندس برمجيات';
+                aboutTitle.textContent = 'عنّي';
+                aboutText.textContent = 'أنا صلاح أحمد، عمري 22 عامًا، أدرس بكلية علوم قسم علوم الحاسب. أعمل كمحلل بيانات، ويسعدني وجودكم على صفحتي الشخصية.';
+                projectsTitle.textContent = 'المشاريع';
+                projectsText.textContent = 'تفاصيل عن مشاريعك هنا.';
+                contactTitle.textContent = 'معلومات الاتصال';
+                skillsTitle.textContent = 'المهارات';
+                cvButton.textContent = 'تحميل السيرة الذاتية';
+                navHome.textContent = 'الرئيسية';
+                navAbout.textContent = 'عنّي';
+                navProjects.textContent = 'المشاريع';
+                navContact.textContent = 'معلومات الاتصال';
+                navSkills.textContent = 'المهارات';
+                navExperience.textContent = 'الخبرات';
+                navEducation.textContent = 'التعليم';
+                navCertifications.textContent = 'الشهادات';
+                navLanguages.textContent = 'اللغات';
+                experienceTitle.textContent = 'الخبرات';
+                experienceItems[0].textContent = 'إدارة الأعمال - شركة Vooc';
+                experienceItems[2].textContent = 'اكتسبت خبرة قيمة في العمل في إدارة الأعمال بشركة Vooc، وهي شركة شحن محلي. خلال هذه الفترة، ساهمت في التشغيل الفعال والتخطيط الاستراتيجي للشركة، مما عزز مهاراتي الإدارية في بيئة ديناميكية.';
+                educationTitle.textContent = 'التعليم';
+                educationItems[0].textContent = 'بكالوريوس في علوم الحاسب';
+                educationItems[1].textContent = 'جامعة دمياط - 2021 إلى 2025';
+                certificationsTitle.textContent = 'الشهادات';
+                certificationItems[0].textContent = 'شهادة ICDL';
+                certificationItems[1].textContent = 'جامعة دمياط';
+                certificationItems[2].textContent = 'مشاركة في مسابقة ECPC';
+                certificationItems[3].textContent = '2023 و 2024';
+                certificationItems[4].textContent = 'شهادة Employability Skills Track';
+                certificationItems[5].textContent = 'الجامعة الأمريكية - Aspire';
+                languagesTitle.textContent = 'اللغات';
+                languagesItems[0].textContent = 'العربية: اللغة الأم';
+                languagesItems[1].textContent = 'الإنجليزية: متقدم';
+                contactFormTitle.textContent = 'تواصل معي';
+                nameInput.placeholder = 'الاسم';
+                emailInput.placeholder = 'البريد الإلكتروني';
+                messageInput.placeholder = 'الرسالة';
+                submitButton.textContent = 'إرسال';
+                skills[0].textContent = 'Python';
+                skills[1].textContent = 'MySQL';
+                skills[2].textContent = 'HTML';
+                skills[3].textContent = 'CSS';
+                skills[4].textContent = 'JavaScript';
+                skills[5].textContent = 'API';
+                skills[6].textContent = 'ICDL';
+                skills[7].textContent = 'Power BI';
+                skills[8].textContent = 'Mathematical';
+                skills[9].textContent = 'Data Analysis';
+                skills[10].textContent = 'Data Entry';
+                skills[11].textContent = 'Data Science';
+                skills[12].textContent = 'Algorithms';
+                skills[13].textContent = 'SQL';
+                skills[14].textContent = 'Git';
+                skills[15].textContent = 'Testing';
+                skills[16].textContent = 'UI/UX';
+                skills[17].textContent = 'Agile';
+                skills[18].textContent = 'DevOps';
+            }
+        }
+
+        // تبديل الوضع الليلي
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
+        // إضافة ظهور العناصر عند التمرير
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll("section");
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
